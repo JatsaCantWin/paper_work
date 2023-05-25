@@ -97,8 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e70933820aa07e49ab050028333bb23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveVerticallyDistance: 5
-  moveHorizontallyDistance: 5
+  moveVerticallyDistance: 6
+  moveHorizontallyDistance: 10
+  keyPressSensitivity: 1.25
   moveSpeed: 20
   fadeOutDuration: 0.5
   fadeInDuration: 0.5

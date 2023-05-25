@@ -26,12 +26,7 @@ public class MapGenerator : MonoBehaviour
     {
         roomWidth = roomWidth * scale;
         roomHeight = roomHeight * scale;
-        
-        float separatorWidth = (roomWidth * roomArray.GetLength(1)) + spaceBetweenRooms * 2;
-        float separatorHeight = (roomHeight * roomArray.GetLength(0)) + spaceBetweenFloors * 2;
-
-        //roomSeparator.GetComponent<SpriteRenderer>().size = new Vector3(separatorWidth, separatorHeight, 0);
-        
+         
         for (int row = 0; row < roomArray.GetLength(0); row++)
         {
             for (int col = 0; col < roomArray.GetLength(1); col++)
@@ -41,6 +36,8 @@ public class MapGenerator : MonoBehaviour
                 
                 switch (roomType)
                 {
+                	case 0:
+                    	break;
                     case 10:
                         roomPrefab = roomCorridor;
                         break;
