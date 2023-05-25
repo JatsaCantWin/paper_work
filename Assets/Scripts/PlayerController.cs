@@ -4,55 +4,56 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveVerticallyDistance = 5f; // distance the player moves vertically with a single button press
-    public float moveHorizontallyDistance = 10f; // distance the player moves horizontally with a single button press
-    public float moveSpeed = 10f; // speed of the player's movement
-    public float fadeOutDuration = 0.5f; // duration for fading out
-    public float fadeInDuration = 0.5f; // duration for fading in
-    public AnimationCurve accelerationCurve; // curve for acceleration and deceleration
+    public float moveVerticallyDistance = 5f;
+    public float moveHorizontallyDistance = 10f;
+    public float keyPressSensitivity = 1.25f;
+    public float moveSpeed = 10f;
+    public float fadeOutDuration = 0.5f;
+    public float fadeInDuration = 0.5f;
+    public AnimationCurve accelerationCurve;
 
-    private bool canMove = true; // flag to indicate if the player can currently move
-    private bool isMoving = false; // flag to indicate if the player is currently moving
-    private Vector3 targetPosition; // target position for the player's movement
-    private Vector3 startPosition; // starting position for the player's movement
-    private SpriteRenderer spriteRenderer; // reference to the sprite renderer component
+    private bool canMove = true;
+    private bool isMoving = false;
+    private Vector3 targetPosition;
+    private Vector3 startPosition;
+    private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    private void ProcessInput()
+    {
+        float horizontalMovement = Mathf.RoundToInt(Input.GetAxis("Horizontal") * keyPressSensitivity); // Will equal -1 when left and 1 when right
+        float verticalMovement   = Mathf.RoundToInt(Input.GetAxis("Vertical") * keyPressSensitivity);   // Will equal -1 when down and 1 when up
+        
+        if (canMove)
+        {
+            if (horizontalMovement != 0)
+            {
+                MovePlayer(new Vector3(horizontalMovement, 0f, 0f), moveHorizontallyDistance, false);
+            }
+
+            if (verticalMovement != 0)
+            {
+                MovePlayer(new Vector3(0f, verticalMovement, 0f), moveVerticallyDistance, true);
+            }
+        }
+    }
+
     private void Update()
     {
-        // Check if the player can move and the arrow key is pressed
-        if (canMove && Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            MovePlayer(Vector3.left, moveHorizontallyDistance, false);
-        }
-        else if (canMove && Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            MovePlayer(Vector3.right, moveHorizontallyDistance, false);
-        }
-        else if (canMove && Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            MovePlayer(Vector3.up, moveVerticallyDistance, true);
-        }
-        else if (canMove && Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            MovePlayer(Vector3.down, moveVerticallyDistance, true);
-        }
+        ProcessInput();
     }
 
     void MovePlayer(Vector3 direction, float distance, bool shouldFade)
     {
-        // Set the target position based on the current position and the move distance
         startPosition = transform.position;
         targetPosition = startPosition + direction * distance;
 
-        // Calculate the time needed to cover the distance
         float moveTime = distance / moveSpeed;
 
-        // Disable further movement until the player reaches the target position
         canMove = false;
         isMoving = true;
 
@@ -63,7 +64,6 @@ public class PlayerController : MonoBehaviour
     {
         if (shouldFade)
         {
-            // Fade out
             float timer = 0f;
             while (timer < fadeOutDuration)
             {
@@ -79,7 +79,6 @@ public class PlayerController : MonoBehaviour
         {
             float t = elapsedTime / moveTime;
 
-            // Apply acceleration and deceleration using the curve
             float speedMultiplier = accelerationCurve.Evaluate(t);
 
             transform.position = Vector3.Lerp(startPosition, targetPosition, speedMultiplier);
@@ -87,12 +86,10 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
 
-        // Set the player's position to the target position
         transform.position = targetPosition;
 
         if (shouldFade)
         {
-            // Fade in
             float timer = 0f;
             while (timer < fadeInDuration)
             {
@@ -103,7 +100,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // Reset the flags for movement
         canMove = true;
         isMoving = false;
     }
