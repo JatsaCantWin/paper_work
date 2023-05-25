@@ -280,10 +280,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c02bb2b53432bb4e82ac4c810df2406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorizableObjects:
-  - {fileID: -3989346385401443251}
-  variableObjects:
-  - {fileID: -3989346385401443251}
+  colorizableObjects: []
+  variableObjects: []
 --- !u!1 &3799154329198264944
 GameObject:
   m_ObjectHideFlags: 0
