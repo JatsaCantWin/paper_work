@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.LowLevel;
 
 public class PlayerController : MonoBehaviour
 {
@@ -48,6 +50,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OrientPlayer(Vector3 direction)
+    {
+        var currentRotation = transform.eulerAngles;
+        var rotationAngle = 90 - (direction.x * 90);
+
+        transform.eulerAngles = new Vector3(currentRotation.x, rotationAngle, currentRotation.z);
+    }
+
     private IEnumerator MoveCoroutine(Vector3 direction, float distance, bool vertical)
     {
         _canMove = false;
@@ -66,6 +76,7 @@ public class PlayerController : MonoBehaviour
 
         if (!vertical)
         {
+            OrientPlayer(direction);
             yield return new WaitForSeconds(cameraMovementDelay);
         }
 
