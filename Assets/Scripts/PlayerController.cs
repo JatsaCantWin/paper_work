@@ -7,17 +7,22 @@ public class PlayerController : MonoBehaviour
     public float moveHorizontallyDistance = 10f;
     public float keyPressSensitivity = 1.25f;
     public float moveSpeed = 10f;
+    public float cameraMovementDelay = 0.08f;
     public float fadeOutDuration = 0.5f;
     public float fadeInDuration = 0.5f;
 
     private bool _canMove = true;
     private FadeController _fadeController;
     private MovementController _movementController;
-
+    private GameObject _mainCamera;
+    private MovementController _mainCameraMovementController;
+    
     private void Start()
     {
         _fadeController = GetComponent<FadeController>();
         _movementController = GetComponent<MovementController>();
+        _mainCamera = GameObject.FindWithTag("MainCamera");
+        _mainCameraMovementController = _mainCamera.GetComponent<MovementController>();
     }
 
     private void Update()
@@ -57,14 +62,35 @@ public class PlayerController : MonoBehaviour
         var startPosition = transform.position;
         var targetPosition = startPosition + direction * distance;
 
-        yield return _movementController.MoveCoroutine(moveTime, startPosition, targetPosition);
+        StartCoroutine(_movementController.MoveCoroutine(moveTime, startPosition, targetPosition));
 
+        if (!vertical)
+        {
+            yield return new WaitForSeconds(cameraMovementDelay);
+        }
+
+        yield return MoveCameraCoroutine(direction, distance);
+        
         if (vertical)
         {
             _fadeController.FadeIn(fadeOutDuration);
             yield return _fadeController.WaitForFadeCoroutine();
         }
         
+        if (!vertical)
+        {
+            yield return new WaitForSeconds(cameraMovementDelay);
+        }
+        
         _canMove = true;
+    }
+
+    private IEnumerator MoveCameraCoroutine(Vector3 direction, float distance)
+    {
+        var moveTime = distance / moveSpeed;
+        var startPosition = _mainCamera.transform.position;
+        var targetPosition = startPosition + direction * distance;
+
+        yield return _mainCameraMovementController.MoveCoroutine(moveTime, startPosition, targetPosition);
     }
 }
