@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,36 +9,15 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 10f;
     public float fadeOutDuration = 0.5f;
     public float fadeInDuration = 0.5f;
-    public AnimationCurve accelerationCurve;
 
-    private bool canMove = true;
-    private bool isMoving = false;
-    private Vector3 targetPosition;
-    private Vector3 startPosition;
-    private SpriteRenderer spriteRenderer;
+    private bool _canMove = true;
+    private FadeController _fadeController;
+    private MovementController _movementController;
 
     private void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    private void ProcessInput()
-    {
-        float horizontalMovement = Mathf.RoundToInt(Input.GetAxis("Horizontal") * keyPressSensitivity); // Will equal -1 when left and 1 when right
-        float verticalMovement   = Mathf.RoundToInt(Input.GetAxis("Vertical") * keyPressSensitivity);   // Will equal -1 when down and 1 when up
-        
-        if (canMove)
-        {
-            if (horizontalMovement != 0)
-            {
-                MovePlayer(new Vector3(horizontalMovement, 0f, 0f), moveHorizontallyDistance, false);
-            }
-
-            if (verticalMovement != 0)
-            {
-                MovePlayer(new Vector3(0f, verticalMovement, 0f), moveVerticallyDistance, true);
-            }
-        }
+        _fadeController = GetComponent<FadeController>();
+        _movementController = GetComponent<MovementController>();
     }
 
     private void Update()
@@ -47,60 +25,46 @@ public class PlayerController : MonoBehaviour
         ProcessInput();
     }
 
-    void MovePlayer(Vector3 direction, float distance, bool shouldFade)
+    private void ProcessInput()
     {
-        startPosition = transform.position;
-        targetPosition = startPosition + direction * distance;
-
-        float moveTime = distance / moveSpeed;
-
-        canMove = false;
-        isMoving = true;
-
-        StartCoroutine(MoveAndFade(shouldFade, moveTime));
+        if (!_canMove)
+            return;
+        
+        float horizontalMovement = Mathf.RoundToInt(Input.GetAxis("Horizontal") * keyPressSensitivity); // Will equal -1 when left and 1 when right
+        if (horizontalMovement != 0)
+        {
+            StartCoroutine(MoveCoroutine(new Vector3(horizontalMovement, 0f, 0f), moveHorizontallyDistance, false));
+        }
+        
+        float verticalMovement   = Mathf.RoundToInt(Input.GetAxis("Vertical") * keyPressSensitivity);   // Will equal -1 when down and 1 when up
+        if (verticalMovement != 0)
+        {
+            StartCoroutine(MoveCoroutine(new Vector3(0f, verticalMovement, 0f), moveVerticallyDistance, true));
+        }
     }
 
-    IEnumerator MoveAndFade(bool shouldFade, float moveTime)
+    private IEnumerator MoveCoroutine(Vector3 direction, float distance, bool vertical)
     {
-        if (shouldFade)
+        _canMove = false;
+        
+        if (vertical)
         {
-            float timer = 0f;
-            while (timer < fadeOutDuration)
-            {
-                float alpha = Mathf.Lerp(1f, 0f, timer / fadeOutDuration);
-                spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, alpha);
-                timer += Time.deltaTime;
-                yield return null;
-            }
+            _fadeController.FadeOut(fadeInDuration);
+            yield return _fadeController.WaitForFadeCoroutine();
         }
 
-        float elapsedTime = 0f;
-        while (elapsedTime < moveTime)
+        var moveTime = distance / moveSpeed;
+        var startPosition = transform.position;
+        var targetPosition = startPosition + direction * distance;
+
+        yield return _movementController.MoveCoroutine(moveTime, startPosition, targetPosition);
+
+        if (vertical)
         {
-            float t = elapsedTime / moveTime;
-
-            float speedMultiplier = accelerationCurve.Evaluate(t);
-
-            transform.position = Vector3.Lerp(startPosition, targetPosition, speedMultiplier);
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            _fadeController.FadeIn(fadeOutDuration);
+            yield return _fadeController.WaitForFadeCoroutine();
         }
-
-        transform.position = targetPosition;
-
-        if (shouldFade)
-        {
-            float timer = 0f;
-            while (timer < fadeInDuration)
-            {
-                float alpha = Mathf.Lerp(0f, 1f, timer / fadeInDuration);
-                spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, alpha);
-                timer += Time.deltaTime;
-                yield return null;
-            }
-        }
-
-        canMove = true;
-        isMoving = false;
+        
+        _canMove = true;
     }
 }
