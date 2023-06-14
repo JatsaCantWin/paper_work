@@ -16,6 +16,8 @@ public class MapGenerator : MonoBehaviour
         {10, 20, 20, 30, 30},
         {10, 20, 0, 0, 0}
     };
+
+    public GameObject[,] gameMap = new GameObject[2,5];
     
     void Start()
     {
@@ -60,6 +62,9 @@ public class MapGenerator : MonoBehaviour
                     GameObject roomInstance = Instantiate(roomPrefab, transform);
                     roomInstance.transform.localPosition = new Vector3(posX, posY, 0f);
                     roomInstance.transform.localScale = new Vector3(scale, scale, 1f);
+
+                    Debug.Log("Room" + roomType + " " + row + " " + col);
+                    gameMap[row, col] = roomInstance;
                 }
             }
         }
