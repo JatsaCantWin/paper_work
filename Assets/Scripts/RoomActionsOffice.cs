@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,10 +7,16 @@ public class RoomActionsOffice : RoomActionsHorizontalMovement
     public GameObject responseOK;
     public GameObject responseNO;
     public float stampWaitTime = 0.5f;
+    
     private bool _playerVisited = false;
+    private StampManager _stampManager;
+
+    private void Start()
+    {
+        _stampManager = GameObject.FindWithTag("Canvas").GetComponent<StampManager>();
+    }
 
     public override void ButtonDown(){}
-
     public override void ButtonUp()
     {
         if (!playerController.canMove)
@@ -31,6 +38,7 @@ public class RoomActionsOffice : RoomActionsHorizontalMovement
         else
         {
             response = responseOK;
+            _stampManager.getStamp();
             _playerVisited = true;
         }
         

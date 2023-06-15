@@ -7,7 +7,9 @@ public class StampManager : MonoBehaviour
     public GameObject documents_1stamp;
     public GameObject documents_2stamp;
     public GameObject documents_3stamp;
-    public TextMeshProUGUI endGameText;
+    public GameObject endGamePaper;
+
+    private PlayerController _playerController;
 
     private int currentStamp = 0;
 
@@ -17,7 +19,9 @@ public class StampManager : MonoBehaviour
         documents_1stamp.SetActive(false);
         documents_2stamp.SetActive(false);
         documents_3stamp.SetActive(false);
-        endGameText.gameObject.SetActive(false);
+        endGamePaper.SetActive(false);
+
+        _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 
      private void Update()
@@ -53,6 +57,7 @@ public class StampManager : MonoBehaviour
     private void EndGame()
     {
         documents_3stamp.SetActive(false);
-        endGameText.gameObject.SetActive(true);
+        endGamePaper.SetActive(true);
+        _playerController.canMove = false;
     }
 }
