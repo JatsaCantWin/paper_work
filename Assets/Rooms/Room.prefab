@@ -59,7 +59,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675130072300380010}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2.595244, y: 1.9786255, z: 0.3964689}
+  m_LocalPosition: {x: 2.6, y: 1.27, z: 0.4}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -78,7 +78,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.79106534, b: 0.52562034, a: 1}
-  m_Intensity: 2
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 45
   m_InnerSpotAngle: 21.80208
@@ -418,7 +418,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3927312261513313969}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.59524393, y: 1.9786255, z: 0.3964689}
+  m_LocalPosition: {x: 0.5999999, y: 1.27, z: 0.4}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -437,7 +437,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.79106534, b: 0.52562034, a: 1}
-  m_Intensity: 2
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 45
   m_InnerSpotAngle: 21.80208
@@ -512,7 +512,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5937100434801238998}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -1.4047561, y: 1.9786255, z: 0.3964689}
+  m_LocalPosition: {x: -1.4000001, y: 1.27, z: 0.4}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -531,7 +531,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.79106534, b: 0.52562034, a: 1}
-  m_Intensity: 200
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 45
   m_InnerSpotAngle: 21.80208
@@ -1042,6 +1042,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: asset_wall_r_hole
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e4efb034d0f711b479a979ab76c4c143, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4efb034d0f711b479a979ab76c4c143, type: 3}
 --- !u!4 &291509526050215615 stripped
@@ -1173,6 +1177,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9cac0057976bbeb4bb3a4e9afd7d7173, type: 3}
       propertyPath: m_Name
       value: asset_wall_l_hole
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9cac0057976bbeb4bb3a4e9afd7d7173, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cac0057976bbeb4bb3a4e9afd7d7173, type: 3}
