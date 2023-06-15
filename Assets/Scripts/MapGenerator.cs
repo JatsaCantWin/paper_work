@@ -6,8 +6,8 @@ public class MapGenerator : MonoBehaviour
     public GameObject roomCorridorDoor;
     public GameObject roomOffice;
 
-    public int numFloors;
-    public int roomsPerFloor;
+    public int numFloors = 5;
+    public int roomsPerFloor = 5;
 
     public float spaceBetweenRooms;
     public float spaceBetweenFloors;
@@ -17,21 +17,22 @@ public class MapGenerator : MonoBehaviour
 
     void Start()
     {
-        GenerateRooms();
+        GenerateMap();
     }
 
-    void GenerateRooms()
+    void GenerateMap()
     {
+        int[,] roomArray = new int[numFloors, roomsPerFloor];
+
+        GenerateCorridorDoorRooms(roomArray);
+        GenerateRemainingRooms(roomArray);
+        GenerateOfficeRooms(roomArray);
+
         roomWidth = roomWidth * scale;
         roomHeight = roomHeight * scale;
 
-        // Randomly generate room layout
-        int[,] roomArray = GenerateRandomRoomLayout();
-
         for (int row = 0; row < numFloors; row++)
         {
-            bool officePlaced = false;
-
             for (int col = 0; col < roomsPerFloor; col++)
             {
                 int roomType = roomArray[row, col];
@@ -49,7 +50,6 @@ public class MapGenerator : MonoBehaviour
                         break;
                     case 30:
                         roomPrefab = roomOffice;
-                        officePlaced = true;
                         break;
                     default:
                         Debug.LogWarning("Invalid room type: " + roomType);
@@ -66,106 +66,69 @@ public class MapGenerator : MonoBehaviour
                     roomInstance.transform.localScale = new Vector3(scale, scale, 1f);
                 }
             }
-
-            // Ensure there is at least one roomOffice on each floor (excluding the bottom floor and rightmost room)
-            if (!officePlaced && row != numFloors - 1 && !IsRightmostRoom(roomArray, row))
-            {
-                // Randomly select a column to place the roomOffice
-                int randomCol = Random.Range(0, roomsPerFloor);
-                roomArray[row, randomCol] = 30;
-
-                float posX = randomCol * (roomWidth + spaceBetweenRooms);
-                float posY = row * (roomHeight + spaceBetweenFloors);
-
-                GameObject roomInstance = Instantiate(roomOffice, transform);
-                roomInstance.transform.localPosition = new Vector3(posX, posY, 0f);
-                roomInstance.transform.localScale = new Vector3(scale, scale, 1f);
-            }
         }
     }
 
-    bool IsRightmostRoom(int[,] roomArray, int row)
+    void GenerateCorridorDoorRooms(int[,] roomArray)
     {
-        for (int col = roomsPerFloor - 1; col >= 0; col--)
+        for (int row = 0; row < numFloors; row++)
         {
-            if (roomArray[row, col] != 0)
-                return false;
+            int randomCol = Random.Range(0, roomsPerFloor);
+            int roomType = 20;
+            roomArray[row, randomCol] = roomType;
+            EnsureAdjacentRoom(roomArray, row, randomCol, roomType);
         }
 
-        return true;
+        // Ensure the top floor corridorDoor room has an adjacent room below
+        int topFloorCol = Random.Range(0, roomsPerFloor);
+        roomArray[numFloors - 1, topFloorCol] = 20;
+        EnsureAdjacentRoom(roomArray, numFloors - 1, topFloorCol, 20);
+
+        // Ensure the bottom floor corridorDoor room has an adjacent room above
+        int bottomFloorCol = Random.Range(0, roomsPerFloor);
+        roomArray[0, bottomFloorCol] = 20;
+        EnsureAdjacentRoom(roomArray, 0, bottomFloorCol, 20);
     }
 
-    int[,] GenerateRandomRoomLayout()
+    void EnsureAdjacentRoom(int[,] roomArray, int row, int col, int roomType)
     {
-        int[,] roomLayout = new int[numFloors, roomsPerFloor];
+        if (row > 0)
+        {
+            int roomAbove = roomArray[row - 1, col];
+            if (roomAbove == 0)
+                roomArray[row - 1, col] = roomType;
+        }
 
-        // Generate random room layout
+        if (row < numFloors - 1)
+        {
+            int roomBelow = roomArray[row + 1, col];
+            if (roomBelow == 0)
+                roomArray[row + 1, col] = roomType;
+        }
+    }
+
+    void GenerateRemainingRooms(int[,] roomArray)
+    {
         for (int row = 0; row < numFloors; row++)
         {
             for (int col = 0; col < roomsPerFloor; col++)
             {
-                if (row == 0)
+                if (roomArray[row, col] == 0)
                 {
-                    // Ensure the first row has corridor rooms
-                    roomLayout[row, col] = (col % 2 == 0) ? 10 : 20;
-                }
-                else
-                {
-                    // Generate random room type for subsequent rows
-                    int roomType = Random.Range(0, 3) * 10;
-                    roomLayout[row, col] = roomType;
+                    int roomType = 10;
+                    roomArray[row, col] = roomType;
                 }
             }
         }
+    }
 
-        // Ensure there is at least one corridor door on each floor
-        for (int row = 1; row < numFloors; row++)
+    void GenerateOfficeRooms(int[,] roomArray)
+    {
+        for (int row = 0; row < numFloors; row++)
         {
-            bool corridorDoorExists = false;
-
-            for (int col = 0; col < roomsPerFloor; col++)
-            {
-                if (roomLayout[row, col] == 20)
-                {
-                    corridorDoorExists = true;
-                    break;
-                }
-            }
-
-            if (!corridorDoorExists)
-            {
-                // Randomly select a column to place a corridor door
-                int randomCol = Random.Range(0, roomsPerFloor);
-                roomLayout[row, randomCol] = 20;
-            }
+            int randomCol = Random.Range(0, roomsPerFloor);
+            int roomType = 30;
+            roomArray[row, randomCol] = roomType;
         }
-
-        // Ensure there are no 'none' rooms below or above another room
-        for (int row = 1; row < numFloors; row++)
-        {
-            for (int col = 0; col < roomsPerFloor; col++)
-            {
-                if (roomLayout[row, col] == 0)
-                {
-                    // Check if there are adjacent rooms in the row above or below
-                    bool hasAdjacentRooms = false;
-
-                    if (row > 0 && roomLayout[row - 1, col] != 0)
-                        hasAdjacentRooms = true;
-
-                    if (row < numFloors - 1 && roomLayout[row + 1, col] != 0)
-                        hasAdjacentRooms = true;
-
-                    if (hasAdjacentRooms)
-                    {
-                        // Generate a random room type other than 'none'
-                        int roomType = Random.Range(1, 4) * 10;
-                        roomLayout[row, col] = roomType;
-                    }
-                }
-            }
-        }
-
-        return roomLayout;
     }
 }
