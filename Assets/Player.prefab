@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 373194574669733155}
   - component: {fileID: 373194574669733154}
   - component: {fileID: 373194574669733152}
+  - component: {fileID: 7700561735293795387}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -103,3 +104,19 @@ MonoBehaviour:
   stairMovementFadeDuration: 0.5
   canMove: 1
   currentRoom: {fileID: 0}
+--- !u!111 &7700561735293795387
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373194574669733157}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: e7abb9e726a78ca4ab840e86fcd87b70, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
