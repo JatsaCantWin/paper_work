@@ -19,8 +19,8 @@ public abstract class RoomActions : MonoBehaviour
         mainCameraMovementController = mainCamera.GetComponent<MovementController>();
     }
 
-    public abstract void ButtonLeft();
     public abstract void ButtonUp();
     public abstract void ButtonDown();
+    public abstract void ButtonLeft();
     public abstract void ButtonRight();
 }
