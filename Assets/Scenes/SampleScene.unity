@@ -1114,7 +1114,7 @@ MonoBehaviour:
   documents_2stamp: {fileID: 1505348178}
   documents_3stamp: {fileID: 916073534}
   endGamePaper: {fileID: 1315537828}
---- !u!1 &2142785619
+\--- !u!1 &2142785619
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
