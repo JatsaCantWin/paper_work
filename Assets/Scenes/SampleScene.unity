@@ -927,7 +927,7 @@ GameObject:
   - component: {fileID: 2129181734}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: Canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1034,7 +1034,7 @@ MonoBehaviour:
   documents_1stamp: {fileID: 2142785619}
   documents_2stamp: {fileID: 1505348178}
   documents_3stamp: {fileID: 916073534}
-  endGameText: {fileID: 0}
+  endGamePaper: {fileID: 0}
 --- !u!1 &2142785619
 GameObject:
   m_ObjectHideFlags: 0
