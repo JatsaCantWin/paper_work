@@ -1,12 +1,8 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
-public class RoomActionsHorizontalMovement : RoomActions
+public abstract class RoomActionsHorizontalMovement : RoomActions
 {
-    public override void ButtonUp(){}
-    public override void ButtonDown(){}
-
     public float moveLeftDistance;
     public float moveRightDistance;
 
