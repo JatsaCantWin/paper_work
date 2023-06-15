@@ -243,6 +243,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5150208941925506839}
   - component: {fileID: 3483323255428726980}
+  - component: {fileID: -2893186941422908943}
   m_Layer: 0
   m_Name: room_empty
   m_TagString: Untagged
@@ -282,6 +283,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorizableObjects: []
   variableObjects: []
+--- !u!114 &-2893186941422908943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3473661332763285366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99c641b4ab8c5c647acdec0cb3d4a9be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveLeftDistance: 10
+  moveRightDistance: 10
 --- !u!1 &3799154329198264944
 GameObject:
   m_ObjectHideFlags: 0
