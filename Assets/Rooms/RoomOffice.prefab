@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2821291684313782644}
+  - component: {fileID: 2802164140106071471}
   m_Layer: 0
   m_Name: RoomOffice
   m_TagString: Untagged
@@ -33,6 +34,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &2802164140106071471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692887420452741452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7acb2bf8e864c9d9b0c193e34859875, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomLeft: {fileID: 0}
+  roomRight: {fileID: 0}
+  roomAbove: {fileID: 0}
+  roomBelow: {fileID: 0}
+  moveLeftDistance: 10
+  moveRightDistance: 10
 --- !u!1 &3356236697681801633
 GameObject:
   m_ObjectHideFlags: 0
