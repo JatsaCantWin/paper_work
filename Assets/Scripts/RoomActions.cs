@@ -10,6 +10,10 @@ public abstract class RoomActions : MonoBehaviour
     protected GameObject mainCamera;
     protected MovementController mainCameraMovementController;
 
+    public RoomActions roomLeft;
+    public RoomActions roomRight;
+    public RoomActions roomAbove;
+    public RoomActions roomBelow;
     
     private void Awake()
     {

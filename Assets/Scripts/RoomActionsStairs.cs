@@ -5,7 +5,7 @@ public class RoomActionsStairs : RoomActionsHorizontalMovement
 {
     public float moveUpwardDistance;
     public float moveDownwardDistance;
-    
+
     private FadeController _fadeController;
     
     private void Start()
@@ -18,6 +18,9 @@ public class RoomActionsStairs : RoomActionsHorizontalMovement
         if (!playerController.canMove)
             return;    
         
+        if (playerController.currentRoom.roomAbove is null)
+            return;
+
         StartCoroutine(MoveCoroutine(new Vector3(0f, -1f, 0f), moveUpwardDistance));
     }
 
@@ -25,6 +28,9 @@ public class RoomActionsStairs : RoomActionsHorizontalMovement
     {
         if (!playerController.canMove)
             return;    
+        
+        if (playerController.currentRoom.roomBelow is null)
+            return;
         
         StartCoroutine(MoveCoroutine(new Vector3( 0f, 1f, 0f), moveDownwardDistance));
     }
@@ -39,8 +45,8 @@ public class RoomActionsStairs : RoomActionsHorizontalMovement
         var moveTime = distance / playerController.moveSpeed;
         var startPosition = player.transform.position;
         var targetPosition = startPosition + direction * distance;
-        
-        playerController.playerY += (int) direction.y;
+
+        playerController.currentRoom = direction.y > 0 ? roomBelow : roomAbove;
         
         StartCoroutine(playerMovementController.MoveCoroutine(moveTime, startPosition, targetPosition));
         yield return MoveCameraCoroutine(direction, distance);
