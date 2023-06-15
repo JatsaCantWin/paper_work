@@ -6,11 +6,12 @@ public abstract class RoomActions : MonoBehaviour
     protected GameObject player;
     protected PlayerController playerController;
     protected MovementController playerMovementController;
+    
     protected GameObject mainCamera;
     protected MovementController mainCameraMovementController;
 
     
-    private void Start()
+    private void Awake()
     {
         player = GameObject.FindWithTag("Player");
         playerController = player.GetComponent<PlayerController>();

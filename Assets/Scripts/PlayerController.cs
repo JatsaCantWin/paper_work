@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     
     public float moveSpeed = 10f;
     public float cameraMovementDelay = 0.08f;
+    public float stairMovementFadeDuration = 0.5f;
 
     public bool canMove = true;
     public int playerX = 0;
