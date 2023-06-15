@@ -923,6 +923,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3845807506799009943}
   - component: {fileID: 129846016615576013}
+  - component: {fileID: 943204051971114324}
   m_Layer: 0
   m_Name: room_office
   m_TagString: Untagged
@@ -968,6 +969,20 @@ MonoBehaviour:
   colorizableObjects: []
   variableObjects:
   - {fileID: 3195567394245054166}
+--- !u!114 &943204051971114324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199076158682081505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7acb2bf8e864c9d9b0c193e34859875, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveLeftDistance: 10
+  moveRightDistance: 10
 --- !u!1 &2456482450990919541
 GameObject:
   m_ObjectHideFlags: 0

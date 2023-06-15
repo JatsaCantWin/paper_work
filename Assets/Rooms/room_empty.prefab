@@ -292,7 +292,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3473661332763285366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c4ab69f6ea803246bc536b342c17a96, type: 3}
+  m_Script: {fileID: 11500000, guid: 99c641b4ab8c5c647acdec0cb3d4a9be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveLeftDistance: 10
