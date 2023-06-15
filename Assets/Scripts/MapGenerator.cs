@@ -14,7 +14,7 @@ public class MapGenerator : MonoBehaviour
     
     public int[,] roomArray = {
         {10, 20, 20, 30, 30},
-        {10, 20, 0, 0, 0}
+        {10, 20, 30, 0, 0}
     };
 
     public GameObject[,] gameMap = new GameObject[2,5];
