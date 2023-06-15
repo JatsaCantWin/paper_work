@@ -11,6 +11,9 @@ public abstract class RoomActionsHorizontalMovement : RoomActions
         if (!playerController.canMove)
             return;    
         
+        if (playerController.currentRoom.roomLeft is null)
+            return;
+        
         StartCoroutine(MoveCoroutine(new Vector3(-1, 0f, 0f), moveLeftDistance));
     }
 
@@ -19,6 +22,9 @@ public abstract class RoomActionsHorizontalMovement : RoomActions
         if (!playerController.canMove)
             return;    
         
+        if (playerController.currentRoom.roomRight is null)
+            return;
+            
         StartCoroutine(MoveCoroutine(new Vector3( 1, 0f, 0f), moveRightDistance));
     }
 
@@ -33,7 +39,7 @@ public abstract class RoomActionsHorizontalMovement : RoomActions
         StartCoroutine(playerMovementController.MoveCoroutine(moveTime, startPosition, targetPosition));
         
         playerController.OrientPlayer(direction);
-        playerController.playerX -= (int) direction.x;
+        playerController.currentRoom = direction.x > 0 ? roomRight : roomLeft;
         
         yield return new WaitForSeconds(playerController.cameraMovementDelay);
         yield return MoveCameraCoroutine(direction, distance);

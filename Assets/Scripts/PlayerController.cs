@@ -13,8 +13,7 @@ public class PlayerController : MonoBehaviour
     public float stairMovementFadeDuration = 0.5f;
 
     public bool canMove = true;
-    public int playerX = 0;
-    public int playerY = 0;
+    public RoomActions currentRoom;
 
     private GameObject _gameMap;
     private MapGenerator _mapGenerator;
@@ -23,6 +22,7 @@ public class PlayerController : MonoBehaviour
     {
         _gameMap = GameObject.FindWithTag("GameMap");
         _mapGenerator = _gameMap.GetComponent<MapGenerator>();
+        currentRoom = _mapGenerator.gameMap[0, 0].GetComponent<RoomActions>();
     }
 
     private void Update()
@@ -32,16 +32,14 @@ public class PlayerController : MonoBehaviour
     
     private void ProcessInput()
     {
-        var currentRoomActions = _mapGenerator.gameMap[playerY, playerX].GetComponent<RoomActions>();
-        
         float horizontalMovement = Mathf.RoundToInt(Input.GetAxis("Horizontal") * keyPressSensitivity); // Will equal -1 when left and 1 when right
         switch (horizontalMovement)
         {
             case -1:
-                currentRoomActions.ButtonLeft();
+                currentRoom.ButtonLeft();
                 break;
             case 1:
-                currentRoomActions.ButtonRight();
+                currentRoom.ButtonRight();
                 break;
         }
         
@@ -49,10 +47,10 @@ public class PlayerController : MonoBehaviour
         switch (verticalMovement)
         {
             case -1:
-                currentRoomActions.ButtonUp();
+                currentRoom.ButtonUp();
                 break;
             case 1:
-                currentRoomActions.ButtonDown();
+                currentRoom.ButtonDown();
                 break;
         }
     }
