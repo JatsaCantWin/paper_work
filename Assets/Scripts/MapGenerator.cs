@@ -63,7 +63,6 @@ public class MapGenerator : MonoBehaviour
                     roomInstance.transform.localPosition = new Vector3(posX, posY, 0f);
                     roomInstance.transform.localScale = new Vector3(scale, scale, 1f);
 
-                    Debug.Log("Room" + roomType + " " + row + " " + col);
                     gameMap[row, col] = roomInstance;
                 }
             }
