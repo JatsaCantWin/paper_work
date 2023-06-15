@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -37,6 +38,12 @@ public class MapGenerator : MonoBehaviour
             {
                 int roomType = roomArray[row, col];
                 GameObject roomPrefab = null;
+
+                if (row == 0 && col == 0)
+                {
+                    // Bottom right corner room is always a corridor room
+                    roomType = 10;
+                }
 
                 switch (roomType)
                 {
@@ -88,6 +95,41 @@ public class MapGenerator : MonoBehaviour
         int bottomFloorCol = Random.Range(0, roomsPerFloor);
         roomArray[0, bottomFloorCol] = 20;
         EnsureAdjacentRoom(roomArray, 0, bottomFloorCol, 20);
+
+        // Ensure corridorDoor rooms in the middle have adjacent corridorDoor rooms above or below
+        for (int row = 1; row < numFloors - 1; row++)
+        {
+            for (int col = 0; col < roomsPerFloor; col++)
+            {
+                if (roomArray[row, col] == 20)
+                {
+                    bool hasAdjacentCorridorRoomAbove = false;
+                    bool hasAdjacentCorridorRoomBelow = false;
+
+                    if (roomArray[row - 1, col] == 20)
+                        hasAdjacentCorridorRoomAbove = true;
+
+                    if (roomArray[row + 1, col] == 20)
+                        hasAdjacentCorridorRoomBelow = true;
+
+                    if (!hasAdjacentCorridorRoomAbove && !hasAdjacentCorridorRoomBelow)
+                    {
+                        if (Random.value < 0.5f)
+                            roomArray[row - 1, col] = 20; // Assign corridorDoor room above
+                        else
+                            roomArray[row + 1, col] = 20; // Assign corridorDoor room below
+                    }
+                    else if (!hasAdjacentCorridorRoomAbove)
+                    {
+                        roomArray[row - 1, col] = 20; // Assign corridorDoor room above
+                    }
+                    else if (!hasAdjacentCorridorRoomBelow)
+                    {
+                        roomArray[row + 1, col] = 20; // Assign corridorDoor room below
+                    }
+                }
+            }
+        }
     }
 
     void EnsureAdjacentRoom(int[,] roomArray, int row, int col, int roomType)
@@ -126,9 +168,16 @@ public class MapGenerator : MonoBehaviour
     {
         for (int row = 0; row < numFloors; row++)
         {
-            int randomCol = Random.Range(0, roomsPerFloor);
-            int roomType = 30;
-            roomArray[row, randomCol] = roomType;
+            for (int col = 0; col < roomsPerFloor; col++)
+            {
+                if (roomArray[row, col] != 20) // Check if the room is not a CorridorDoor room
+                {
+                    int roomType = 30;
+                    roomArray[row, col] = roomType;
+                    break; // Exit the loop after assigning the office room type
+                }
+            }
         }
     }
+
 }
