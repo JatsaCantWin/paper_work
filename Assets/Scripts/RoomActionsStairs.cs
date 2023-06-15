@@ -41,7 +41,6 @@ public class RoomActionsStairs : RoomActionsHorizontalMovement
         var targetPosition = startPosition + direction * distance;
         
         playerController.playerY += (int) direction.y;
-        Debug.Log(playerController.playerX + " " + playerController.playerY);
         
         StartCoroutine(playerMovementController.MoveCoroutine(moveTime, startPosition, targetPosition));
         yield return MoveCameraCoroutine(direction, distance);
