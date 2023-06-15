@@ -2,23 +2,26 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.LowLevel;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameObject gameMap;
-    public float moveVerticallyDistance = 5f;
     public float keyPressSensitivity = 1.25f;
+    
     public float moveSpeed = 10f;
     public float cameraMovementDelay = 0.08f;
 
     public bool canMove = true;
-
     public int playerX = 0;
     public int playerY = 0;
 
+    private GameObject _gameMap;
+    private MapGenerator _mapGenerator;
+
     private void Start()
     {
-        gameMap = GameObject.FindWithTag("GameMap");
+        _gameMap = GameObject.FindWithTag("GameMap");
+        _mapGenerator = _gameMap.GetComponent<MapGenerator>();
     }
 
     private void Update()
@@ -28,23 +31,28 @@ public class PlayerController : MonoBehaviour
     
     private void ProcessInput()
     {
-        Debug.Log(playerX + " " + playerY);
-        var currentRoomActions = gameMap.GetComponent<MapGenerator>().gameMap[playerX, playerY].GetComponent<RoomActions>();
+        var currentRoomActions = _mapGenerator.gameMap[playerY, playerX].GetComponent<RoomActions>();
         
         float horizontalMovement = Mathf.RoundToInt(Input.GetAxis("Horizontal") * keyPressSensitivity); // Will equal -1 when left and 1 when right
-        if (horizontalMovement < 0)
+        switch (horizontalMovement)
         {
-            currentRoomActions.ButtonLeft();
-        }
-        else if (horizontalMovement > 0)
-        {
-            currentRoomActions.ButtonRight();
+            case -1:
+                currentRoomActions.ButtonLeft();
+                break;
+            case 1:
+                currentRoomActions.ButtonRight();
+                break;
         }
         
         float verticalMovement   = Mathf.RoundToInt(Input.GetAxis("Vertical") * keyPressSensitivity);   // Will equal -1 when down and 1 when up
-        if (verticalMovement != 0)
+        switch (verticalMovement)
         {
-            //StartCoroutine(MoveCoroutine(new Vector3(0f, verticalMovement, 0f), moveVerticallyDistance, true));
+            case -1:
+                currentRoomActions.ButtonUp();
+                break;
+            case 1:
+                currentRoomActions.ButtonDown();
+                break;
         }
     }
     
