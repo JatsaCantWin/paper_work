@@ -31,6 +31,7 @@ public abstract class RoomActionsHorizontalMovement : RoomActions
         var targetPosition = startPosition + direction * distance;
 
         StartCoroutine(playerMovementController.MoveCoroutine(moveTime, startPosition, targetPosition));
+        
         playerController.OrientPlayer(direction);
         playerController.playerX -= (int) direction.x;
         
@@ -39,14 +40,5 @@ public abstract class RoomActionsHorizontalMovement : RoomActions
         yield return new WaitForSeconds(playerController.cameraMovementDelay);
 
         playerController.canMove = true;
-    }
-    
-    private IEnumerator MoveCameraCoroutine(Vector3 direction, float distance)
-    {
-        var moveTime = distance / playerController.moveSpeed;
-        var startPosition = mainCamera.transform.position;
-        var targetPosition = startPosition + direction * distance;
-
-        yield return mainCameraMovementController.MoveCoroutine(moveTime, startPosition, targetPosition);
     }
 }
