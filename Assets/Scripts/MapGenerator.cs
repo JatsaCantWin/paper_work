@@ -115,7 +115,13 @@ public class MapGenerator : MonoBehaviour
         for (var row = 0; row < numFloors-1; row+=2)
         {
             while (randomCol == prevRandomCol)
+            {
                 randomCol = Random.Range(0, roomsPerFloor);
+                if ((row == 0) && (randomCol == entranceCoordX))
+                {
+                    randomCol = prevRandomCol;
+                }
+            }
 
             prevRandomCol = randomCol;
 
