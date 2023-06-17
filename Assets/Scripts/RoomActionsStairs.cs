@@ -8,8 +8,9 @@ public class RoomActionsStairs : RoomActionsHorizontalMovement
 
     private FadeController _fadeController;
     
-    private void Start()
+    public override void Start()
     {
+        base.Start();
         _fadeController = player.GetComponent<FadeController>();
     }
     

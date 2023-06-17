@@ -236,9 +236,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c6204c9abacd843aaded42464c5295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomCorridor: {fileID: 1244645940824097103, guid: 4222264983b9a9044baace56f5703f44, type: 3}
+  roomCorridor: {fileID: 3614112600460110882, guid: cfe7d78716ede9147ab4e41613b15c75, type: 3}
   roomCorridorDoor: {fileID: 2083828357249279361, guid: df923a25d55afc042958b9cf7aaabf70, type: 3}
   roomOffice: {fileID: 1692887420452741452, guid: 27188afb15dc76d4e8ccfd5b2aa0a3d2, type: 3}
+  numFloors: 5
+  roomsPerFloor: 5
+  entranceCoordX: 0
+  entranceCoordY: 0
   spaceBetweenRooms: 10
   spaceBetweenFloors: 6
   scale: 1

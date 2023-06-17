@@ -11,8 +11,9 @@ public class RoomActionsOffice : RoomActionsHorizontalMovement
     private bool _playerVisited = false;
     private StampManager _stampManager;
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
         _stampManager = GameObject.FindWithTag("Canvas").GetComponent<StampManager>();
     }
 

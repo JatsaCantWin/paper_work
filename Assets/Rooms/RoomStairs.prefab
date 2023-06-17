@@ -79,10 +79,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1c879452004322a132272fe8dead47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomLeft: {fileID: 0}
-  roomRight: {fileID: 0}
-  roomAbove: {fileID: 0}
-  roomBelow: {fileID: 0}
+  leftDoor: {fileID: 4860214257949160224}
+  wallBothHoles: {fileID: 2181730140942936267}
+  wallLeftHole: {fileID: 695509384219753876}
+  wallRightHole: {fileID: 9019191486752844667}
   moveLeftDistance: 10
   moveRightDistance: 10
   moveUpwardDistance: 6
@@ -310,8 +310,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4222264983b9a9044baace56f5703f44, type: 3}
+--- !u!1 &695509384219753876 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8920538173001620202, guid: 4222264983b9a9044baace56f5703f44, type: 3}
+  m_PrefabInstance: {fileID: 8244661746263697278}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2181730140942936267 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7795163804176093109, guid: 4222264983b9a9044baace56f5703f44, type: 3}
+  m_PrefabInstance: {fileID: 8244661746263697278}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4860214257949160224 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3537611802312807518, guid: 4222264983b9a9044baace56f5703f44, type: 3}
+  m_PrefabInstance: {fileID: 8244661746263697278}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8313094422985191126 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 86948796836907432, guid: 4222264983b9a9044baace56f5703f44, type: 3}
+  m_PrefabInstance: {fileID: 8244661746263697278}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9019191486752844667 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1099009091074640901, guid: 4222264983b9a9044baace56f5703f44, type: 3}
   m_PrefabInstance: {fileID: 8244661746263697278}
   m_PrefabAsset: {fileID: 0}

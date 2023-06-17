@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -10,10 +11,19 @@ public abstract class RoomActions : MonoBehaviour
     protected GameObject mainCamera;
     protected MovementController mainCameraMovementController;
 
+    [NonSerialized]
     public RoomActions roomLeft;
+    [NonSerialized]
     public RoomActions roomRight;
+    [NonSerialized]
     public RoomActions roomAbove;
+    [NonSerialized]
     public RoomActions roomBelow;
+
+    public GameObject leftDoor;
+    public GameObject wallBothHoles;
+    public GameObject wallLeftHole;
+    public GameObject wallRightHole;
     
     private void Awake()
     {
@@ -23,6 +33,21 @@ public abstract class RoomActions : MonoBehaviour
         
         mainCamera = GameObject.FindWithTag("MainCamera");
         mainCameraMovementController = mainCamera.GetComponent<MovementController>();
+    }
+
+    public virtual void Start()
+    {
+        if (roomLeft == null)
+        {
+            leftDoor.SetActive(false);
+            wallBothHoles.SetActive(false);
+            wallRightHole.SetActive(true);
+        } 
+        else if (roomRight == null)
+        {
+            wallBothHoles.SetActive(false);
+            wallLeftHole.SetActive(true);
+        }
     }
 
     public abstract void ButtonUp();
