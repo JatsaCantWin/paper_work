@@ -6,7 +6,8 @@ public class RoomGenerator: MonoBehaviour
 {
     public GameObject[] colorizableObjects;
     public GameObject[] variableObjects;
-    
+    public GameObject[] prefabObjects;
+
     public void Start()
     {
         foreach (var colorizableObject in colorizableObjects)
@@ -31,6 +32,18 @@ public class RoomGenerator: MonoBehaviour
             }
             
             VarySprite(variableObject, spritePalette.GetRandomSprite());
+        }
+
+        foreach (var prefabObject in prefabObjects)
+        {
+            var prefabPalette = prefabObject.GetComponent<PrefabPalette>();
+
+            if (prefabPalette == null)
+            {
+                Debug.LogError("Object '" + prefabObject.name + "' does not have a PrefabPalette component.");
+            }
+
+            VaryPrefab(prefabObject, prefabPalette.GetRandomPrefab());
         }
     }
     
@@ -58,5 +71,22 @@ public class RoomGenerator: MonoBehaviour
         }
         
         spriteRenderer.sprite = sprite;
+    }
+
+    void VaryPrefab(GameObject prefabObject, GameObject randomPrefab)
+    {
+        if (prefabObject == null || randomPrefab == null)
+        {
+            Debug.LogError("Prefab object or random prefab is null.");
+            return;
+        }
+
+        GameObject instantiatedPrefab = Instantiate(randomPrefab);
+
+        instantiatedPrefab.transform.position = prefabObject.transform.position;
+        instantiatedPrefab.transform.rotation = prefabObject.transform.rotation;
+        instantiatedPrefab.transform.localScale = prefabObject.transform.localScale;
+
+        Destroy(prefabObject);
     }
 }
