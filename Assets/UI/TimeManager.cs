@@ -11,37 +11,26 @@ public class TimeManager : MonoBehaviour
     public string targetTime = "13:00";
 
     private float currentTime = 0f;
-    private bool isGameEnded = false;
+
+	private PlayerController _playerController;
 
     private void Start()
     {
+		_playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+
         currentTime = ConvertTimeToMinutes(startTime);
 		DisplayTime(currentTime);
     }
 
-    private void Update()
-    {
-        if (isGameEnded)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                QuitGame();
-            }
-            return;
-        }
-    }
-
     public void AddTime(float minuteDuration)
     {
-        if (isGameEnded)
-            return;
-
         currentTime += minuteDuration;
         DisplayTime(currentTime);
         
         if (currentTime >= ConvertTimeToMinutes(targetTime))
         {
-            EndGame();
+        	endGamePaper.SetActive(true);
+            _playerController.gameEnded = true;
         }
     }
 
@@ -59,20 +48,5 @@ public class TimeManager : MonoBehaviour
         int hours = int.Parse(timeArray[0]);
         int minutes = int.Parse(timeArray[1]);
         return hours * 60 + minutes;
-    }
-
-    private void EndGame()
-    {
-        isGameEnded = true;
-        endGamePaper.SetActive(true);
-    }
-
-    private void QuitGame()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
     }
 }
