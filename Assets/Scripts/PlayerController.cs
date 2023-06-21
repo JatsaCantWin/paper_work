@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.LowLevel;
 using UnityEngine.Serialization;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     private GameObject _gameMap;
     private MapGenerator _mapGenerator;
+
+    public bool gameEnded;
 
     private void Start()
     {
@@ -34,6 +37,15 @@ public class PlayerController : MonoBehaviour
     {
         if (!canMove)
         {
+            return;
+        }
+
+        if (gameEnded)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                ResetScene();
+            }
             return;
         }
 
@@ -64,5 +76,11 @@ public class PlayerController : MonoBehaviour
         var rotationAngle = 90 - (direction.x * 90);
 
         transform.eulerAngles = new Vector3(currentRotation.x, rotationAngle, currentRotation.z);
+    }
+
+    private void ResetScene()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
     }
 }
