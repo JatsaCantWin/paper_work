@@ -8,6 +8,7 @@ public abstract class RoomActionsHorizontalMovement : RoomActions
 
     public override void ButtonLeft()
     {
+        base.ButtonLeft();
         if (!playerController.canMove)
             return;    
         
@@ -19,6 +20,7 @@ public abstract class RoomActionsHorizontalMovement : RoomActions
 
     public override void ButtonRight()
     {
+        base.ButtonRight();
         if (!playerController.canMove)
             return;    
         

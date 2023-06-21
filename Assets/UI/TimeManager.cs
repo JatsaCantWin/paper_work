@@ -13,13 +13,13 @@ public class TimeManager : MonoBehaviour
     private float currentTime = 0f;
     private bool isGameEnded = false;
 
-    void Start()
+    private void Start()
     {
         currentTime = ConvertTimeToMinutes(startTime);
 		DisplayTime(currentTime);
     }
 
-    void Update()
+    private void Update()
     {
         if (isGameEnded)
         {
@@ -31,7 +31,7 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    void AddTime(float minuteDuration)
+    public void AddTime(float minuteDuration)
     {
         if (isGameEnded)
             return;
@@ -45,7 +45,7 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    void DisplayTime(float minutes)
+    private void DisplayTime(float minutes)
     {
         int hours = Mathf.FloorToInt(minutes / 60);
         int minutesLeft = Mathf.FloorToInt(minutes % 60);
@@ -53,7 +53,7 @@ public class TimeManager : MonoBehaviour
         timeText.text = timeString;
     }
 
-    float ConvertTimeToMinutes(string time)
+    private float ConvertTimeToMinutes(string time)
     {
         string[] timeArray = time.Split(':');
         int hours = int.Parse(timeArray[0]);
@@ -61,13 +61,13 @@ public class TimeManager : MonoBehaviour
         return hours * 60 + minutes;
     }
 
-    void EndGame()
+    private void EndGame()
     {
         isGameEnded = true;
         endGamePaper.SetActive(true);
     }
 
-    void QuitGame()
+    private void QuitGame()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;

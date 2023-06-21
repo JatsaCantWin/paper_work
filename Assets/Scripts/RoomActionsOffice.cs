@@ -17,9 +17,9 @@ public class RoomActionsOffice : RoomActionsHorizontalMovement
         _stampManager = GameObject.FindWithTag("Canvas").GetComponent<StampManager>();
     }
 
-    public override void ButtonDown(){}
     public override void ButtonUp()
     {
+        base.ButtonUp();
         if (!playerController.canMove)
             return;
 
