@@ -933,7 +933,7 @@ MonoBehaviour:
   timeText: {fileID: 1902606635}
   endGamePaper: {fileID: 1967332877}
   startTime: 11:00
-  targetTime: 13:00
+  targetTime: 17:00
 --- !u!212 &1580508307
 SpriteRenderer:
   m_ObjectHideFlags: 0

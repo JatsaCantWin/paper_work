@@ -7,7 +7,7 @@ public class RoomGenerator: MonoBehaviour
     public GameObject[] colorizableObjects;
     public GameObject[] variableObjects;
     
-    public void Start()
+    public void Awake()
     {
         foreach (var colorizableObject in colorizableObjects)
         {
@@ -36,15 +36,15 @@ public class RoomGenerator: MonoBehaviour
     
     protected static void ColorizeObject(GameObject obj, Color color)
     {
-        var spriteRenderer = obj.GetComponent<SpriteRenderer>();
+        var renderer = obj.GetComponent<Renderer>();
 
-        if (spriteRenderer == null)
+        if (renderer == null)
         {
-            Debug.LogError("Object '" + obj.name + "' does not have a SpriteRenderer component.");
+            Debug.LogError("Object '" + obj.name + "' does not have a Renderer component.");
             return;
         }
-        
-        spriteRenderer.color = color;
+
+		renderer.material.color = color;
     }
 
     protected static void VarySprite(GameObject obj, Sprite sprite)
