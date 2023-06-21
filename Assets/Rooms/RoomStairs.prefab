@@ -43,6 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 834362199606628004}
   - component: {fileID: -2999921245931954050}
+  - component: {fileID: -5253183693100418459}
   m_Layer: 0
   m_Name: RoomStairs
   m_TagString: Untagged
@@ -79,14 +80,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1c879452004322a132272fe8dead47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomLeft: {fileID: 0}
-  roomRight: {fileID: 0}
-  roomAbove: {fileID: 0}
-  roomBelow: {fileID: 0}
+  leftDoor: {fileID: 4860214257949160224}
+  wallBothHoles: {fileID: 2181730140942936267}
+  wallLeftHole: {fileID: 695509384219753876}
+  wallRightHole: {fileID: 9019191486752844667}
+  timeCostUp: 5
+  timeCostDown: 5
+  timeCostLeft: 5
+  timeCostRight: 5
   moveLeftDistance: 10
   moveRightDistance: 10
   moveUpwardDistance: 6
   moveDownwardDistance: 6
+--- !u!114 &-5253183693100418459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083828357249279361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67a23624b82e38577b1382852ae8d21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  synchronizedObjects:
+  - {fileID: 2181730140942936267}
+  - {fileID: 4826461289525118340}
 --- !u!1 &4450804258628713297
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,6 +280,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 834362199606628004}
     m_Modifications:
+    - target: {fileID: 2707326237910488, guid: 4222264983b9a9044baace56f5703f44, type: 3}
+      propertyPath: synchronizedObjects.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707326237910488, guid: 4222264983b9a9044baace56f5703f44, type: 3}
+      propertyPath: synchronizedObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 695509384219753876}
+    - target: {fileID: 2707326237910488, guid: 4222264983b9a9044baace56f5703f44, type: 3}
+      propertyPath: synchronizedObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 9019191486752844667}
     - target: {fileID: 86948796836907432, guid: 4222264983b9a9044baace56f5703f44, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -308,10 +340,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room
       objectReference: {fileID: 0}
+    - target: {fileID: 8655332533630804992, guid: 4222264983b9a9044baace56f5703f44, type: 3}
+      propertyPath: colorizableObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655332533630804992, guid: 4222264983b9a9044baace56f5703f44, type: 3}
+      propertyPath: colorizableObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 9019191486752844667}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4222264983b9a9044baace56f5703f44, type: 3}
+--- !u!1 &695509384219753876 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8920538173001620202, guid: 4222264983b9a9044baace56f5703f44, type: 3}
+  m_PrefabInstance: {fileID: 8244661746263697278}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2181730140942936267 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7795163804176093109, guid: 4222264983b9a9044baace56f5703f44, type: 3}
+  m_PrefabInstance: {fileID: 8244661746263697278}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4860214257949160224 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3537611802312807518, guid: 4222264983b9a9044baace56f5703f44, type: 3}
+  m_PrefabInstance: {fileID: 8244661746263697278}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8313094422985191126 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 86948796836907432, guid: 4222264983b9a9044baace56f5703f44, type: 3}
+  m_PrefabInstance: {fileID: 8244661746263697278}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9019191486752844667 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1099009091074640901, guid: 4222264983b9a9044baace56f5703f44, type: 3}
   m_PrefabInstance: {fileID: 8244661746263697278}
   m_PrefabAsset: {fileID: 0}

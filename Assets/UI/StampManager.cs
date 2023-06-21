@@ -58,6 +58,6 @@ public class StampManager : MonoBehaviour
     {
         documents_3stamp.SetActive(false);
         endGamePaper.SetActive(true);
-        _playerController.canMove = false;
+        _playerController.gameEnded = true;
     }
 }

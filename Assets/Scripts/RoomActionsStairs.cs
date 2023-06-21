@@ -8,8 +8,9 @@ public class RoomActionsStairs : RoomActionsHorizontalMovement
 
     private FadeController _fadeController;
     
-    private void Start()
+    public override void Start()
     {
+        base.Start();
         _fadeController = player.GetComponent<FadeController>();
     }
     
@@ -23,6 +24,8 @@ public class RoomActionsStairs : RoomActionsHorizontalMovement
         
         if (playerController.currentRoom.roomAbove.GetType() != typeof(RoomActionsStairs))
             return;
+        
+        base.ButtonUp();
 
         StartCoroutine(MoveCoroutine(new Vector3(0f, -1f, 0f), moveUpwardDistance));
     }
@@ -38,6 +41,8 @@ public class RoomActionsStairs : RoomActionsHorizontalMovement
         if (playerController.currentRoom.roomBelow.GetType() != typeof(RoomActionsStairs))
             return;
             
+        base.ButtonDown();
+
         StartCoroutine(MoveCoroutine(new Vector3( 0f, 1f, 0f), moveDownwardDistance));
     }
     

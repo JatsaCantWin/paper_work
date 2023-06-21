@@ -14,6 +14,8 @@ public abstract class RoomActionsHorizontalMovement : RoomActions
         if (playerController.currentRoom.roomLeft is null)
             return;
         
+        base.ButtonLeft();
+
         StartCoroutine(MoveCoroutine(new Vector3(-1, 0f, 0f), moveLeftDistance));
     }
 
@@ -24,7 +26,9 @@ public abstract class RoomActionsHorizontalMovement : RoomActions
         
         if (playerController.currentRoom.roomRight is null)
             return;
-            
+        
+        base.ButtonRight();
+
         StartCoroutine(MoveCoroutine(new Vector3( 1, 0f, 0f), moveRightDistance));
     }
 

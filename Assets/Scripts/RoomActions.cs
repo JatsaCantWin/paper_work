@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -10,10 +11,27 @@ public abstract class RoomActions : MonoBehaviour
     protected GameObject mainCamera;
     protected MovementController mainCameraMovementController;
 
+    [NonSerialized]
     public RoomActions roomLeft;
+    [NonSerialized]
     public RoomActions roomRight;
+    [NonSerialized]
     public RoomActions roomAbove;
+    [NonSerialized]
     public RoomActions roomBelow;
+
+    public GameObject leftDoor;
+    public GameObject wallBothHoles;
+    public GameObject wallLeftHole;
+    public GameObject wallRightHole;
+
+    protected GameObject clock;
+    protected TimeManager timeManager;
+    
+    public float timeCostUp;
+    public float timeCostDown;
+    public float timeCostLeft;
+    public float timeCostRight;
     
     private void Awake()
     {
@@ -23,12 +41,45 @@ public abstract class RoomActions : MonoBehaviour
         
         mainCamera = GameObject.FindWithTag("MainCamera");
         mainCameraMovementController = mainCamera.GetComponent<MovementController>();
+
+        clock = GameObject.FindWithTag("Clock");
+        timeManager = clock.GetComponent<TimeManager>();
     }
 
-    public abstract void ButtonUp();
-    public abstract void ButtonDown();
-    public abstract void ButtonLeft();
-    public abstract void ButtonRight();
+    public virtual void Start()
+    {
+        if (roomLeft == null)
+        {
+            leftDoor.SetActive(false);
+            wallBothHoles.SetActive(false);
+            wallRightHole.SetActive(true);
+        } 
+        else if (roomRight == null)
+        {
+            wallBothHoles.SetActive(false);
+            wallLeftHole.SetActive(true);
+        }
+    }
+
+    public virtual void ButtonUp()
+    {
+        timeManager.AddTime(timeCostUp);
+    }
+
+    public virtual void ButtonDown()
+    {
+        timeManager.AddTime(timeCostDown);
+    }
+
+    public virtual void ButtonLeft()
+    {
+        timeManager.AddTime(timeCostLeft);
+    }
+
+    public virtual void ButtonRight()
+    {
+        timeManager.AddTime(timeCostRight);
+    }
     
     protected IEnumerator MoveCameraCoroutine(Vector3 direction, float distance)
     {

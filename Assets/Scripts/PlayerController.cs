@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.LowLevel;
 using UnityEngine.Serialization;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private GameObject _gameMap;
     private MapGenerator _mapGenerator;
 
+    public bool gameEnded;
+
     private void Start()
     {
         _gameMap = GameObject.FindWithTag("GameMap");
@@ -32,26 +35,38 @@ public class PlayerController : MonoBehaviour
     
     private void ProcessInput()
     {
-        float horizontalMovement = Mathf.RoundToInt(Input.GetAxis("Horizontal") * keyPressSensitivity); // Will equal -1 when left and 1 when right
-        switch (horizontalMovement)
+        if (!canMove)
         {
-            case -1:
-                currentRoom.ButtonLeft();
-                break;
-            case 1:
-                currentRoom.ButtonRight();
-                break;
+            return;
         }
-        
-        float verticalMovement   = Mathf.RoundToInt(Input.GetAxis("Vertical") * keyPressSensitivity);   // Will equal -1 when down and 1 when up
-        switch (verticalMovement)
+
+        if (gameEnded)
         {
-            case -1:
-                currentRoom.ButtonUp();
-                break;
-            case 1:
-                currentRoom.ButtonDown();
-                break;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                ResetScene();
+            }
+            return;
+        }
+
+        float horizontalMovement = Input.GetAxisRaw("Horizontal");
+        if (horizontalMovement == -1)
+        {
+            currentRoom.ButtonLeft();
+        }
+        else if (horizontalMovement == 1)
+        {
+            currentRoom.ButtonRight();
+        }
+
+        float verticalMovement = Input.GetAxisRaw("Vertical");
+        if (verticalMovement == -1)
+        {
+            currentRoom.ButtonUp();
+        }
+        else if (verticalMovement == 1)
+        {
+            currentRoom.ButtonDown();
         }
     }
     
@@ -61,5 +76,11 @@ public class PlayerController : MonoBehaviour
         var rotationAngle = 90 - (direction.x * 90);
 
         transform.eulerAngles = new Vector3(currentRotation.x, rotationAngle, currentRotation.z);
+    }
+
+    private void ResetScene()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
     }
 }

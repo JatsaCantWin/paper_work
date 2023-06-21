@@ -69,7 +69,7 @@ public class MapGenerator : MonoBehaviour
                 if (row == 0 && col == 0)
                 {
                     // Bottom right corner room is always a corridor room
-                    roomType = 10;
+                    roomType = RoomTypeEntrance;
                 }
                 
                 switch (roomType)
