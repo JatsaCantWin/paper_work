@@ -16,8 +16,6 @@ public class RoomActionsStairs : RoomActionsHorizontalMovement
     
     public override void ButtonUp()
     {
-        base.ButtonUp();
-        
         if (!playerController.canMove)
             return;    
         
@@ -26,14 +24,14 @@ public class RoomActionsStairs : RoomActionsHorizontalMovement
         
         if (playerController.currentRoom.roomAbove.GetType() != typeof(RoomActionsStairs))
             return;
+        
+        base.ButtonUp();
 
         StartCoroutine(MoveCoroutine(new Vector3(0f, -1f, 0f), moveUpwardDistance));
     }
 
     public override void ButtonDown()
     {
-        base.ButtonDown();
-        
         if (!playerController.canMove)
             return;
         
@@ -43,6 +41,8 @@ public class RoomActionsStairs : RoomActionsHorizontalMovement
         if (playerController.currentRoom.roomBelow.GetType() != typeof(RoomActionsStairs))
             return;
             
+        base.ButtonDown();
+
         StartCoroutine(MoveCoroutine(new Vector3( 0f, 1f, 0f), moveDownwardDistance));
     }
     
