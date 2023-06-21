@@ -6,8 +6,8 @@ using TMPro;
 public class TimeManager : MonoBehaviour
 {
     public TextMeshProUGUI timeText;
-    public TextMeshProUGUI endGameText;
-    public float minuteDuration = 0.25f;
+    public GameObject endGamePaper;
+    public string startTime = "11:00";
     public string targetTime = "13:00";
 
     private float currentTime = 0f;
@@ -15,8 +15,8 @@ public class TimeManager : MonoBehaviour
 
     void Start()
     {
-        currentTime = ConvertTimeToMinutes("11:00");
-        InvokeRepeating("AddTime", 0f, minuteDuration);
+        currentTime = ConvertTimeToMinutes(startTime);
+		DisplayTime(currentTime);
     }
 
     void Update()
@@ -29,20 +29,20 @@ public class TimeManager : MonoBehaviour
             }
             return;
         }
-
-        if (currentTime >= ConvertTimeToMinutes(targetTime))
-        {
-            EndGame();
-        }
     }
 
-    void AddTime()
+    void AddTime(float minuteDuration)
     {
         if (isGameEnded)
             return;
 
         currentTime += minuteDuration;
         DisplayTime(currentTime);
+        
+        if (currentTime >= ConvertTimeToMinutes(targetTime))
+        {
+            EndGame();
+        }
     }
 
     void DisplayTime(float minutes)
@@ -64,8 +64,7 @@ public class TimeManager : MonoBehaviour
     void EndGame()
     {
         isGameEnded = true;
-        CancelInvoke("AddTime");
-        endGameText.gameObject.SetActive(true);
+        endGamePaper.SetActive(true);
     }
 
     void QuitGame()
