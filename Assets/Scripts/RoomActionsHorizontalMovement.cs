@@ -8,25 +8,27 @@ public abstract class RoomActionsHorizontalMovement : RoomActions
 
     public override void ButtonLeft()
     {
-        base.ButtonLeft();
         if (!playerController.canMove)
             return;    
         
         if (playerController.currentRoom.roomLeft is null)
             return;
         
+        base.ButtonLeft();
+
         StartCoroutine(MoveCoroutine(new Vector3(-1, 0f, 0f), moveLeftDistance));
     }
 
     public override void ButtonRight()
     {
-        base.ButtonRight();
         if (!playerController.canMove)
             return;    
         
         if (playerController.currentRoom.roomRight is null)
             return;
-            
+        
+        base.ButtonRight();
+
         StartCoroutine(MoveCoroutine(new Vector3( 1, 0f, 0f), moveRightDistance));
     }
 
