@@ -171,6 +171,10 @@ MonoBehaviour:
   wallBothHoles: {fileID: 6961438808605481311}
   wallLeftHole: {fileID: 8609226279263702016}
   wallRightHole: {fileID: 285544722213608175}
+  timeCostUp: 20
+  timeCostDown: 0
+  timeCostLeft: 5
+  timeCostRight: 5
   moveLeftDistance: 10
   moveRightDistance: 10
   responseOK: {fileID: 2576772124462322580}

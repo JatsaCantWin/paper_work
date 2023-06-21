@@ -32,26 +32,29 @@ public class PlayerController : MonoBehaviour
     
     private void ProcessInput()
     {
-        float horizontalMovement = Mathf.RoundToInt(Input.GetAxis("Horizontal") * keyPressSensitivity); // Will equal -1 when left and 1 when right
-        switch (horizontalMovement)
+        if (!canMove)
         {
-            case -1:
-                currentRoom.ButtonLeft();
-                break;
-            case 1:
-                currentRoom.ButtonRight();
-                break;
+            return;
         }
-        
-        float verticalMovement   = Mathf.RoundToInt(Input.GetAxis("Vertical") * keyPressSensitivity);   // Will equal -1 when down and 1 when up
-        switch (verticalMovement)
+
+        float horizontalMovement = Input.GetAxisRaw("Horizontal");
+        if (horizontalMovement == -1)
         {
-            case -1:
-                currentRoom.ButtonUp();
-                break;
-            case 1:
-                currentRoom.ButtonDown();
-                break;
+            currentRoom.ButtonLeft();
+        }
+        else if (horizontalMovement == 1)
+        {
+            currentRoom.ButtonRight();
+        }
+
+        float verticalMovement = Input.GetAxisRaw("Vertical");
+        if (verticalMovement == -1)
+        {
+            currentRoom.ButtonUp();
+        }
+        else if (verticalMovement == 1)
+        {
+            currentRoom.ButtonDown();
         }
     }
     

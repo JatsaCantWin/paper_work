@@ -49,6 +49,10 @@ MonoBehaviour:
   wallBothHoles: {fileID: 5729722023339909553}
   wallLeftHole: {fileID: 6369758707342685422}
   wallRightHole: {fileID: 3236264099220529665}
+  timeCostUp: 0
+  timeCostDown: 0
+  timeCostLeft: 5
+  timeCostRight: 5
   moveLeftDistance: 10
   moveRightDistance: 10
 --- !u!1001 &2569853340260134404

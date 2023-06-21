@@ -16,6 +16,8 @@ public class RoomActionsStairs : RoomActionsHorizontalMovement
     
     public override void ButtonUp()
     {
+        base.ButtonUp();
+        
         if (!playerController.canMove)
             return;    
         
@@ -30,6 +32,8 @@ public class RoomActionsStairs : RoomActionsHorizontalMovement
 
     public override void ButtonDown()
     {
+        base.ButtonDown();
+        
         if (!playerController.canMove)
             return;
         
