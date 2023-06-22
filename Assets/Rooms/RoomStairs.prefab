@@ -93,6 +93,8 @@ MonoBehaviour:
   moveRightDistance: 10
   moveUpwardDistance: 6
   moveDownwardDistance: 6
+  arrowUp: {fileID: 8678898295772897799}
+  arrowDown: {fileID: 4753049635557330003}
 --- !u!114 &-5253183693100418459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,6 +348,16 @@ PrefabInstance:
 --- !u!4 &385798397298631836 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bfac136f73510154ea430ad393684c89, type: 3}
+  m_PrefabInstance: {fileID: 202689352228864887}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4753049635557330003 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4838591759001505572, guid: bfac136f73510154ea430ad393684c89, type: 3}
+  m_PrefabInstance: {fileID: 202689352228864887}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8678898295772897799 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -386820421677063824, guid: bfac136f73510154ea430ad393684c89, type: 3}
   m_PrefabInstance: {fileID: 202689352228864887}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8244661746263697278
