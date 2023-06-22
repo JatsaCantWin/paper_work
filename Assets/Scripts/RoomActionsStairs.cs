@@ -6,12 +6,24 @@ public class RoomActionsStairs : RoomActionsHorizontalMovement
     public float moveUpwardDistance;
     public float moveDownwardDistance;
 
+    public GameObject arrowUp;
+    public GameObject arrowDown;
+    
     private FadeController _fadeController;
     
     public override void Start()
     {
         base.Start();
         _fadeController = player.GetComponent<FadeController>();
+        
+        if ((roomAbove == null)||(roomAbove.GetType() != typeof(RoomActionsStairs)))
+        {
+            arrowUp.SetActive(false);
+        } 
+        else if ((roomBelow == null)||(roomBelow.GetType() != typeof(RoomActionsStairs)))
+        {
+            arrowDown.SetActive(false);
+        }
     }
     
     public override void ButtonUp()
