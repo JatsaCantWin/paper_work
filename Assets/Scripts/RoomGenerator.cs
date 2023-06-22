@@ -75,14 +75,20 @@ public class RoomGenerator: MonoBehaviour
 
     void VaryPrefab(GameObject prefabObject, GameObject randomPrefab)
     {
-        if (prefabObject == null || randomPrefab == null)
+        if (randomPrefab == null)
         {
-            Debug.LogError("Prefab object or random prefab is null.");
+            Destroy(prefabObject);
             return;
         }
-
-        GameObject instantiatedPrefab = Instantiate(randomPrefab);
-
+            
+        if (prefabObject == null)
+        {
+            Debug.LogError("Prefab object is null.");
+            return;
+        }
+        
+        GameObject instantiatedPrefab = Instantiate(randomPrefab, transform);
+        
         instantiatedPrefab.transform.position = prefabObject.transform.position;
         instantiatedPrefab.transform.rotation = prefabObject.transform.rotation;
         instantiatedPrefab.transform.localScale = prefabObject.transform.localScale;
