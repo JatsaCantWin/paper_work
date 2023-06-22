@@ -263,6 +263,7 @@ MonoBehaviour:
   colorizableObjects:
   - {fileID: 7795163804176093109}
   variableObjects: []
+  prefabObjects: []
 --- !u!114 &2707326237910488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -799,12 +800,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorArray:
-  - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0.9372549, g: 0.49019608, b: 0.34117648, a: 0}
-  - {r: 1, g: 0.25353774, b: 0.0047169924, a: 0}
-  - {r: 1, g: 0.25353774, b: 0.98039216, a: 0}
+  - {r: 0.735849, g: 0.38014132, b: 0.26032394, a: 0}
   - {r: 1, g: 0.55463713, b: 0.254902, a: 0}
   - {r: 1, g: 1, b: 1, a: 0}
+  - {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 0}
 --- !u!1 &7919296137951470821
 GameObject:
   m_ObjectHideFlags: 0
